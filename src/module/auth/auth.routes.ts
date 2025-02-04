@@ -6,14 +6,15 @@ import { userAuthValidation } from './auth.validation'
 const UserRouter = Router()
 
 UserRouter.post(
-  '/register',
+  '/auth/register',
   validateRequest(userAuthValidation.registrationValidation),
   authControllers.createUser
 )
 UserRouter.post(
-  '/login',
+  '/auth/login',
   validateRequest(userAuthValidation.loginValidation),
   authControllers.loginUser
 )
+UserRouter.get('/users', authControllers.getUsers)
 
 export default UserRouter

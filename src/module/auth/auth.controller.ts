@@ -24,10 +24,20 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
       data: result,
     })
   })
+const getUsers = catchAsync(async (req: Request, res: Response) => {
+    const result = await userServcies.getUserIntroDB()
+    sendResponse(res, {
+      statusCode: 201,
+      success: true,
+      message: 'User retrived successfully',
+      data: result,
+    })
+  })
 
 
 
 export const authControllers = {
     createUser,
-    loginUser
+    loginUser,
+    getUsers
 }
