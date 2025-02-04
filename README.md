@@ -1,73 +1,123 @@
-# Bike Store Backend
+# Real-time Chat Application
 
-A simple and efficient **RESTful API** built with **Express.js** and **TypeScript** to manage bike products and customer orders. This API supports core features like bike management, order creation, and revenue calculation.
+This is a simple real-time chat application built using **Node.js, Express.js, MongoDB, and Socket.io**. The application allows users to communicate in real-time with authentication and message persistence.
 
----
+## 🚀 Features
 
-## Features
-
-- **Product Management**
-  - Add, view, update, and delete bikes.
-  - Filter products by name.
-- **Order Management**
-  - Place orders for bikes and manage stock.
-- **Revenue Insights**
-  - Calculate total revenue from all orders.
-
----
-
-## API Endpoints
-
-### Product Endpoints
-
-| Endpoint                     | Method | Description                         |
-|------------------------------|--------|-------------------------------------|
-| `/api/products`              | POST   | Add a new bike                     |
-| `/api/products`              | GET    | Get all bikes or filter by name    |
-| `/api/products/:productId`   | GET    | Retrieve details of a specific bike|
-| `/api/products/:productId`   | PUT    | Update details of a specific bike  |
-| `/api/products/:productId`   | DELETE | Delete a specific bike             |
-
-### Order Endpoints
-
-| Endpoint                   | Method | Description                              |
-|----------------------------|--------|------------------------------------------|
-| `/api/orders`              | POST   | Place an order                          |
-| `/api/orders/revenue`      | GET    | Calculate total revenue from all orders |
+- **User Authentication** (JWT-based authentication - Sign Up & Login)
+- **Real-time Messaging** using Socket.io
+- **Message Persistence** (Messages stored in MongoDB)
+- **User List** (Fetch all registered users)
+- **Previous Chat History** (Fetch previous messages between users)
+- **RESTful API Endpoints** for user and chat management
+- **Secure Password Hashing** using bcrypt.js
+- **Deployment Ready** (Optional - Render/Vercel/Heroku)
 
 ---
 
-## Getting Started
+## 🛠 Tech Stack
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/roton02/Bike-store-Backend.git
-   cd Bike-store-Backend
+- **Backend:** Node.js, Express.js, MongoDB, Mongoose, JWT, bcrypt.js, Socket.io
+- **Database:** MongoDB (Atlas or Local MongoDB instance)
+- **Real-time Communication:** Socket.io
+- **Version Control:** Git & GitHub
 
-Install Dependencies:
+---
 
-Step 2: Install Dependencies
-Run the following command to install all required packages:
+## 📌 Installation & Setup
 
-  ```bash
-npm install
+### Prerequisites
+- **Node.js** installed (v14 or later)
+- **MongoDB** (Local or Atlas)
+- **Git** installed
+
+### Steps to Run Locally
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-username/chat-app.git
+   cd chat-app
+   ```
+
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+
+3. Create a `.env` file and configure it:
+   ```env
+   PORT=5000
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_secret_key
+   ```
+
+4. Start the server:
+   ```sh
+   npm start
+   ```
+
+5. The server will run on `http://localhost:5000`
+
+---
+
+## 🔌 API Endpoints
+
+### **User Authentication**
+| Method | Endpoint | Description |
+|--------|---------|-------------|
+| POST | `/api/auth/register` | Register a new user |
+| POST | `/api/auth/login` | Login user and get JWT token |
+
+### **User Management**
+| Method | Endpoint | Description |
+|--------|---------|-------------|
+| GET | `/api/users` | Fetch list of registered users |
+
+### **Chat Management**
+| Method | Endpoint | Description |
+|--------|---------|-------------|
+| GET | `/api/messages/:userId` | Fetch previous messages between users |
+
+---
+
+## ⚡ WebSocket Events (Socket.io)
+
+| Event | Description |
+|--------|-------------|
+| `connect` | When a user connects to the server |
+| `message` | Sent when a user sends a message |
+| `userJoined` | Sent when a user joins the chat |
+| `userLeft` | Sent when a user leaves the chat |
+| `disconnect` | When a user disconnects |
+
+---
+
+## 📦 Project Structure
+
 ```
-Step 3: Setup Environment Variables
-Configure the .env file in the root directory to include the necessary environment variables:
-
-PORT
-MONGO_URI
-NODE_ENV
- - 
-Create a .env file and add:
-env
-  ```bash
-PORT=5000
-
-DATABASE_URL =mongodb+srv://next-level-a2-user:a2121212@cluster0.mi2xoxt.mongodb.net/bike-store?retryWrites=true&w=majority&appName=Cluster0
+chat-app/
+│── config/
+│   ├── db.js       # MongoDB connection
+│── models/
+│   ├── User.js     # User Schema
+│   ├── Message.js  # Message Schema
+│── routes/
+│   ├── auth.js     # Authentication Routes
+│   ├── users.js    # User Management Routes
+│   ├── messages.js # Message Fetching Routes
+│── server.js       # Express Server
+│── socket.js       # Socket.io Setup
+│── .env            # Environment Variables
+│── package.json    # Dependencies
+│── README.md       # Documentation
 ```
-Step 4: Start the Server
-Use this command to start the server in development mode: 
 
-```bash
-npm run dev
+---
+
+## 🛡 Security Measures
+- Passwords are **hashed** using bcrypt.js
+- JWT is used for **secure authentication**
+- Environment variables (`.env`) are used to store sensitive data
+
+---
+
