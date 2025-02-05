@@ -6,6 +6,7 @@ const messageShcema = new Schema<IMessage>(
     sender: { type: Schema.Types.ObjectId, required: true, ref: 'user' },
     receiver: { type: Schema.Types.ObjectId, required: true, ref: 'user' },
     content: { type: String, required: true },
+    isDeleted: { type: Boolean, default: false },
   },
   {
     timestamps: true,
