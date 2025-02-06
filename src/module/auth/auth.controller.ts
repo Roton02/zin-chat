@@ -16,12 +16,20 @@ const createUser = catchAsync(async (req: Request, res: Response) => {
   })
 const loginUser = catchAsync(async (req: Request, res: Response) => {
     const payload = req.body
-    const result = await userServcies.loginUserIntroDb(payload)
+    const {token} = await userServcies.loginUserIntroDb(payload)
+
+    res.cookie("jwt", token, {
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      httpOnly: true, 
+      sameSite: "strict",
+      secure: process.env.NODE_ENV !== "development",
+    })
+
     sendResponse(res, {
-      statusCode: 201,
+      statusCode: 200,
       success: true,
       message: 'User Login successfully',
-      data: result,
+      data: '',
     })
   })
 const getUsers = catchAsync(async (req: Request, res: Response) => {
