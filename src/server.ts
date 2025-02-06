@@ -78,4 +78,4 @@ async function startServer() {
 
 startServer()
 
-export { io }
+export default io 
