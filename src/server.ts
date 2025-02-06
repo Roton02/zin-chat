@@ -26,7 +26,7 @@ io.on('connection', async (socket) => {
     io.emit('activeUsers', Object.keys(userSocketMap)) // Broadcast active users
   })
 
-  // ✅ Handle message sending
+  //  Handle message sending
   socket.on('sendMessage', async ({ senderId, receiverId, message }) => {
     console.log(`📨 Message from ${senderId} to ${receiverId}: ${message}`)
 
@@ -38,7 +38,7 @@ io.on('connection', async (socket) => {
       timestamp: new Date(),
     })
 
-    // ✅ Find the receiver's socket ID
+    //  Find the receiver's socket ID
     const receiverSocketId = userSocketMap[receiverId]
 
     if (receiverSocketId) {
