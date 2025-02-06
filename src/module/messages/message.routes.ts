@@ -12,5 +12,10 @@ messageRouter.post(
   validateRequest(messageValidationSchema),
   messageControllers.storeMessage
 )
+messageRouter.get(
+  '/messages/:userId',
+  // auth(),
+  messageControllers.getMessage
+)
 
 export default messageRouter

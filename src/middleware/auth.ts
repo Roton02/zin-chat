@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 // import AppError from '../error/AppError'
 import config from '../config'
 import jwt, { JwtPayload } from 'jsonwebtoken'
-import catchAsync from '../utils/catchAsync'
+// import catchAsync from '../utils/catchAsync'
 import { user } from '../module/auth/auth.model'
 
 const auth = () => {
