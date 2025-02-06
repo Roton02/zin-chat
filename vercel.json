@@ -1,18 +1,7 @@
 {
-  "rewrites": [
-        {"source": "/(.*)", "destination": "/"}
-    ],
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/server.js",
-      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
-    }
-  ]
+  "version": 2,
+
+  "builds": [{ "src": "src/server.ts", "use": "@vercel/node" }],
+
+  "routes": [{ "src": "/(.*)", "dest": "src/server.ts" }]
 }
