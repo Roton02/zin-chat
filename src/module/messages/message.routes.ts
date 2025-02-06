@@ -14,7 +14,7 @@ messageRouter.post(
 )
 messageRouter.get(
   '/messages/:userId',
-  // auth(),
+  auth(),
   messageControllers.getMessage
 )
 

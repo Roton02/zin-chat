@@ -10,7 +10,7 @@ const auth = () => {
   return (
     async (req: Request, res: Response, next: NextFunction) => {
       console.log('inner');
-      const token = req.headers.authorization?.split(' ')[1]
+      const token = req.cookies.jwt
       console.log(token)
       if (!token) {
         throw new Error(' token not found ')
