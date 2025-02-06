@@ -9,17 +9,9 @@ const storeMessageIntroDB = async (payload: IMessage) => {
   if (!sender) {
     throw new AppError(400, 'Sender not found')
   }
-  const receiver = await user.findById( payload.receiver )
+  const receiver = await user.findById(payload.receiver)
   if (!receiver) {
     throw new AppError(400, 'Receiver not found')
-  }
-
-  const isExist = await messages.findOne({
-    sender: sender?._id,
-    receiver: receiver?._id,
-  })
-  if (isExist) {
-    throw new AppError(400, 'Message already exists')
   }
 
   const result = await messages.create(payload)
@@ -27,8 +19,20 @@ const storeMessageIntroDB = async (payload: IMessage) => {
 }
 const getMessageIntroDB = async (payload: string, email: string) => {
   //checking the sender and reciver is exist in my database
+  const reciver = await user.findById(payload)
+  if (!reciver) {
+    throw new AppError(400, 'Reciver not a valid user ')
+  }
   const sender = await user.findOne({ email: email })
-  const result = await messages.find({ sender: sender?._id, receiver: payload })
+  const result = await messages
+    .find({
+      $or: [
+        { sender: sender?._id, receiver: payload },
+        { sender: payload, receiver: sender?._id },
+      ],
+    })
+    .populate('sender', "name email" )
+    .populate('receiver' , "name email")
   return result
 }
 
