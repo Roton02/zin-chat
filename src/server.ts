@@ -1,9 +1,9 @@
-import mongoose from 'mongoose'
 import app from './app'
 import config from './config'
 import { Server } from 'socket.io'
 import http from 'http'
 import { messages } from './module/messages/message.model'
+import mongoose from 'mongoose'
 
 const server = http.createServer(app) // ✅ Attach Express app to HTTP server
 
