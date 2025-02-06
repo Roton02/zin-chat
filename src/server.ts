@@ -26,7 +26,7 @@ io.on('connection', async (socket) => {
     io.emit('activeUsers', Object.keys(userSocketMap)) // Broadcast active users
   })
 
-  //  Handle message sending
+  // ✅ Handle message sending
   socket.on('sendMessage', async ({ senderId, receiverId, message }) => {
     console.log(`📨 Message from ${senderId} to ${receiverId}: ${message}`)
 
@@ -38,7 +38,7 @@ io.on('connection', async (socket) => {
       timestamp: new Date(),
     })
 
-    //  Find the receiver's socket ID
+    // ✅ Find the receiver's socket ID
     const receiverSocketId = userSocketMap[receiverId]
 
     if (receiverSocketId) {
@@ -67,9 +67,9 @@ io.on('connection', async (socket) => {
 async function startServer() {
   try {
     await mongoose.connect(config.database_url as string)
-
-    server.listen(config.port, () => {
-      console.log(`🚀 Server running on port ${config.port}`)
+    const PORT = process.env.PORT || config.port
+    server.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`)
     })
   } catch (error) {
     console.error(error)
@@ -78,4 +78,4 @@ async function startServer() {
 
 startServer()
 
-export default io 
+export default io
